@@ -51,14 +51,17 @@ function Register() {
                                     <div className="form-group mb-3">
                                         <label>Full Name</label>
                                         <input type="" name="name" onChange={handleInput} value={registerInput.name} className="form-control" />
+                                        <span>{registerInput.error_list.name}</span>
                                     </div>
                                     <div className="form-group mb-3">
                                         <label>Email ID</label>
                                         <input type="" onChange={handleInput} value={registerInput.email} className="form-control" />
+                                        <span>{registerInput.error_list.email}</span>
                                     </div>
                                     <div className="form-group mb-3">
                                         <label>Password</label>
                                         <input type="" onChange={handleInput} value={registerInput.password} className="form-control" />
+                                        <span>{registerInput.error_list.password}</span>
                                     </div>
                                     <div className="form-group mb-3">
                                         <button type="submit" className="btn btn-primary">Register</button>
