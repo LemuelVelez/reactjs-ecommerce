@@ -33,8 +33,6 @@ function Register() {
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.username);
                     swal("Success", res.data.message, "success");
-                    console.log("Registration successful");
-                    console.log(history);
                     history.push('/');
                 }
                 else {
