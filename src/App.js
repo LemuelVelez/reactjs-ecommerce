@@ -8,7 +8,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.headers.post['Acccept'] = 'application/json';
+axios.defaults.headers.post['Accept'] = 'application/json';
 
 axios.defaults.withCredentials = true;
 
@@ -17,12 +17,10 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route path="/admin" name="Admin" render={(props) => <MasterLayout{...props} />} />
-
         </Switch>
       </Router>
     </div>
