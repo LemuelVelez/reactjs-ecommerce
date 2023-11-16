@@ -1,9 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import MasterLayout from "./layouts/admin/MasterLayout";
+// import MasterLayout from "./layouts/admin/MasterLayout";
 import Home from './components/frontend/Home';
 import Login from "./components/frontend/auth/Login";
 import Register from "./components/frontend/auth/Register";
+import Page403 from "./components/errors/Page403";
+import Page404 from "./components/errors/Page404";
 import axios from 'axios';
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import AdminPrivateRoute from './AdminPrivateRoute';
@@ -25,6 +27,10 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
+
+          <Route path="/403" component={Page403} />
+          <Route path="/404" component={Page404} />
+
           {/* <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} /> */}
           <Route path="/login">
