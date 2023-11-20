@@ -1,10 +1,47 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ViewCategory() {
 
-    const[loading, setLoading] = useState(true)
-    
+    const [loading, setLoading] = useState(true);
+    const [categoryList, setCategoryList] = useState([]);
+
+    useEffect(() => {
+
+        axios.get(`/api/view-category`).then(res => {
+            // console.log(res.data.category);
+            if (res.status === 200) {
+                setCategoryList(res.data.category)
+            }
+            setLoading(false);
+        });
+    }, []);
+
+    var viewcategory_HTMLTABLE = "";
+    if (loading) {
+        return <h4>Loading Category...</h4>
+    }
+    else {
+        viewcategory_HTMLTABLE =
+            categoryList.map((item) => {
+                return (
+                    <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.slug}</td>
+                        <td>{item.status}</td>
+                        <td>
+                            <Link to={`edit-category/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
+                        </td>
+                        <td>
+                            <button type="button" className="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </tr>
+                )
+            })
+    }
+
     return (
         <div className="container px-4">
             <div className="card mt-4">
@@ -14,7 +51,7 @@ function ViewCategory() {
                     </h4>
                 </div>
                 <div className="card-body">
-                    <table>
+                    <table className="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -26,7 +63,7 @@ function ViewCategory() {
                             </tr>
                         </thead>
                         <tbody>
-
+                            {viewcategory_HTMLTABLE}
                         </tbody>
                     </table>
                 </div>
