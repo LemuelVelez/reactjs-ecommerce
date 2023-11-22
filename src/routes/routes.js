@@ -9,7 +9,7 @@ const routes = [
     { path: '/admin/dashboard', exact: true, name: 'Dashboard', component: Dashboard },
     { path: '/admin/add-category', exact: true, name: 'Category', component: Category },
     { path: '/admin/view-category', exact: true, name: 'ViewCategory', component: ViewCategory },
-    { path: '/admin/edit-category:id', exact: true, name: 'EditCategory', component: EditCategory },
+    { path: '/admin/edit-category/:id', exact: true, name: 'EditCategory', component: EditCategory },
     { path: '/admin/profile', exact: true, name: 'Profile', component: Profile },
 ];
 
