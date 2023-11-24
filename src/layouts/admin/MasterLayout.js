@@ -2,7 +2,8 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import '../../assets/admin/css/styles.css';
 import '../../assets/admin/js/scripts';
-
+import '@fortawesome/fontawesome-free/css/all.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
