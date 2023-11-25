@@ -1,7 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import MasterLayout from "./layouts/admin/MasterLayout";
-import Home from './components/frontend/Home';
+import PublicRoute from "./PublicRoute";
+// import Home from './components/frontend/Home';
+// import About from './components/frontend/About';
+// import Contact from './components/frontend/Contact';
 import Login from "./components/frontend/auth/Login";
 import Register from "./components/frontend/auth/Register";
 import Page403 from "./components/errors/Page403";
@@ -26,8 +29,11 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
-
+          {/* <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/contact" component={Contact} /> */}
+          <AdminPrivateRoute path="/admin" name="Admin" />
+          <PublicRoute path="/" name="Home" />
           <Route path="/403" component={Page403} />
           <Route path="/404" component={Page404} />
 
@@ -40,7 +46,7 @@ function App() {
             {localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Register />}
           </Route>
           {/* <Route path="/admin" name="Admin" render={(props) => <MasterLayout {...props} />} /> */}
-          <AdminPrivateRoute path="/admin" name="Admin" />
+
         </Switch>
       </Router>
     </div>
