@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import '../../assets/admin/css/styles.css';
+import 'bootstrap/dist/js/bootstrap.bundle.js';
 import '../../assets/admin/js/scripts';
-import '@fortawesome/fontawesome-free/css/all.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
@@ -23,6 +23,7 @@ const MasterLayout = () => {
 
                 <div id="layoutSidenav_content">
                     <main>
+
                         <Switch>
                             {routes.map((route, idx) => {
                                 return (
@@ -41,6 +42,7 @@ const MasterLayout = () => {
                             })}
                             <Redirect from="/admin" to="/admin/dashboard" />
                         </Switch>
+
                     </main>
                     <Footer />
                 </div>

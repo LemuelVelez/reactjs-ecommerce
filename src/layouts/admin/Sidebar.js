@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
-
     return (
         <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div className="sb-sidenav-menu">
@@ -21,6 +20,7 @@ const Sidebar = () => {
                         View Category
                     </Link>
 
+
                     <Link className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct">
                         <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
                         Products
@@ -33,10 +33,17 @@ const Sidebar = () => {
                         </nav>
                     </div>
 
+
                     <Link className="nav-link" to="/admin/profile">
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         Profile
                     </Link>
+
+                    <Link className="nav-link" to="/admin/orders">
+                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                        Orders
+                    </Link>
+
                     <div className="sb-sidenav-menu-heading">Interface</div>
                     <Link className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
@@ -63,19 +70,8 @@ const Sidebar = () => {
                             <div className="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav className="sb-sidenav-menu-nested nav">
                                     <Link className="nav-link" to="login.html">Login</Link>
-                                    <Link className="nav-link" to="register.html">Register</Link>
-                                    <Link className="nav-link" to="password.html">Forgot Password</Link>
-                                </nav>
-                            </div>
-                            <Link className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                Error
-                                <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                            </Link>
-                            <div className="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav className="sb-sidenav-menu-nested nav">
-                                    <Link className="nav-link" to="401.html">401 Page</Link>
-                                    <Link className="nav-link" to="404.html">404 Page</Link>
-                                    <Link className="nav-link" to="500.html">500 Page</Link>
+                                    <Link className="nav-link" to="login.html">Register</Link>
+                                    <Link className="nav-link" to="login.html">Extra</Link>
                                 </nav>
                             </div>
                         </nav>
@@ -97,7 +93,6 @@ const Sidebar = () => {
             </div>
         </nav>
     );
-
 }
 
 export default Sidebar;

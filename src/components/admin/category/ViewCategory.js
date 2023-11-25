@@ -1,29 +1,36 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import swal from "sweetalert";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 function ViewCategory() {
 
     const [loading, setLoading] = useState(true);
-    const [categoryList, setCategoryList] = useState([]);
+    const [categorylist, setCategorylist] = useState([]);
 
     useEffect(() => {
+        let isMounted = true;
 
         axios.get(`/api/view-category`).then(res => {
-            // console.log(res.data.category);
-            if (res.status === 200) {
-                setCategoryList(res.data.category)
+            if (isMounted) {
+                if (res.status === 200) {
+                    setCategorylist(res.data.category)
+                    setLoading(false);
+                }
             }
-            setLoading(false);
         });
+
+        return () => {
+            isMounted = false
+        };
+
     }, []);
 
     const deleteCategory = (e, id) => {
         e.preventDefault();
 
         const thisClicked = e.currentTarget;
-        thisClicked.innerText = " Deleting";
+        thisClicked.innerText = "Deleting";
 
         axios.delete(`/api/delete-category/${id}`).then(res => {
             if (res.data.status === 200) {
@@ -34,7 +41,8 @@ function ViewCategory() {
                 swal("Success", res.data.message, "success");
                 thisClicked.innerText = "Delete";
             }
-        })
+        });
+
     }
 
     var viewcategory_HTMLTABLE = "";
@@ -43,7 +51,7 @@ function ViewCategory() {
     }
     else {
         viewcategory_HTMLTABLE =
-            categoryList.map((item) => {
+            categorylist.map((item) => {
                 return (
                     <tr key={item.id}>
                         <td>{item.id}</td>
@@ -58,14 +66,14 @@ function ViewCategory() {
                         </td>
                     </tr>
                 )
-            })
+            });
     }
 
     return (
         <div className="container px-4">
             <div className="card mt-4">
                 <div className="card-header">
-                    <h4> Category List
+                    <h4>Category List
                         <Link to="/admin/add-category" className="btn btn-primary btn-sm float-end">Add Category</Link>
                     </h4>
                 </div>
@@ -88,7 +96,8 @@ function ViewCategory() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 export default ViewCategory;
+
