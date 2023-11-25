@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import Navbar from "../../../layouts/frontend/Navbar";
-import axios from "axios";
-import swal from "sweetalert";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+
+import axios from 'axios';
+import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
 
     const history = useHistory();
+
     const [loginInput, setLogin] = useState({
         email: '',
         password: '',
@@ -25,6 +26,7 @@ function Login() {
             email: loginInput.email,
             password: loginInput.password,
         }
+
         axios.get('/sanctum/csrf-cookie').then(response => {
             axios.post(`api/login`, data).then(res => {
                 if (res.data.status === 200) {
@@ -46,11 +48,11 @@ function Login() {
                 }
             });
         });
+
     }
 
     return (
         <div>
-            <Navbar />
             <div className="container py-5">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
@@ -80,7 +82,7 @@ function Login() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Login;

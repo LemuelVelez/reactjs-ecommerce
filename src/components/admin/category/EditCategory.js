@@ -1,27 +1,28 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom";
-import swal from "sweetalert";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 function EditCategory(props) {
-
     const history = useHistory();
     const [loading, setLoading] = useState(true);
     const [categoryInput, setCategory] = useState([]);
     const [error, setError] = useState([]);
 
     useEffect(() => {
+
         const category_id = props.match.params.id;
-        axios.get(`api/edit-category/${category_id}`).then(res => {
+        axios.get(`/api/edit-category/${category_id}`).then(res => {
             if (res.data.status === 200) {
                 setCategory(res.data.category);
             }
             else if (res.data.status === 404) {
                 swal("Error", res.data.message, "error");
-                history.push(`/admin/view-category`);
+                history.push('/admin/view-category');
             }
             setLoading(false);
         });
+
     }, [props.match.params.id, history]);
 
     const handleInput = (e) => {
@@ -40,7 +41,7 @@ function EditCategory(props) {
                 setError([]);
             }
             else if (res.data.status === 422) {
-                swal("All fields are mandatory", "", "error");
+                swal("All fields are mandetory", "", "error");
                 setError(res.data.errors);
             }
             else if (res.data.status === 404) {
@@ -63,17 +64,19 @@ function EditCategory(props) {
                     </h4>
                 </div>
                 <div className="card-body">
+
                     <form onSubmit={updateCategory}>
                         <ul className="nav nav-tabs" id="myTab" role="tablist">
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+                                <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
                             </li>
                             <li className="nav-item" role="presentation">
                                 <button className="nav-link" id="seo-tags-tab" data-bs-toggle="tab" data-bs-target="#seo-tags" type="button" role="tab" aria-controls="seo-tags" aria-selected="false">SEO Tags</button>
                             </li>
                         </ul>
                         <div className="tab-content" id="myTabContent">
-                            <div className="tab-pane card-body border fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab">
+                            <div className="tab-pane card-body border fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
                                 <div className="form-group mb-3">
                                     <label>Slug</label>
                                     <input type="text" name="slug" onChange={handleInput} value={categoryInput.slug} className="form-control" />
@@ -92,8 +95,10 @@ function EditCategory(props) {
                                     <label>Status</label>
                                     <input type="checkbox" name="status" onChange={handleInput} value={categoryInput.status} /> Status 0=shown/1=hidden
                                 </div>
+
                             </div>
                             <div className="tab-pane card-body border fade" id="seo-tags" role="tabpanel" aria-labelledby="seo-tags-tab">
+
                                 <div className="form-group mb-3">
                                     <label>Meta Title</label>
                                     <input type="text" name="meta_title" onChange={handleInput} value={categoryInput.meta_title} className="form-control" />
@@ -107,10 +112,12 @@ function EditCategory(props) {
                                     <label>Meta Description</label>
                                     <textarea name="meta_descrip" onChange={handleInput} value={categoryInput.meta_descrip} className="form-control"></textarea>
                                 </div>
+
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary px-4 float-end">Update</button>
                     </form>
+
                 </div>
             </div>
         </div>

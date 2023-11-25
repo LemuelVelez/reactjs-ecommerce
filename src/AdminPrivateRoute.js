@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Route, Redirect } from 'react-router-dom';
-import MasterLayout from "./layouts/admin/MasterLayout";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
-import swal from "sweetalert";
+import React, { useState, useEffect } from 'react';
+import { Route, Redirect, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import MasterLayout from './layouts/admin/MasterLayout';
+import swal from 'sweetalert';
 
 function AdminPrivateRoute({ ...rest }) {
 
     const history = useHistory();
+
     const [Authenticated, setAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setloading] = useState(true);
 
     useEffect(() => {
-        axios.get(`/api/checkingAuthenticated`)
-            .then(res => {
-                if (res && res.status === 200) {
-                    setAuthenticated(true);
-                }
-            })
-            .catch(error => {
-                // Handle error if necessary
-                console.error(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+
+        axios.get(`/api/checkingAuthenticated`).then(res => {
+            if (res.status === 200) {
+                setAuthenticated(true);
+            }
+            setloading(false);
+        });
 
         return () => {
             setAuthenticated(false);
@@ -47,7 +41,7 @@ function AdminPrivateRoute({ ...rest }) {
             swal("Forbidden", error.response.data.message, "warning");
             history.push('/403');
         }
-        else if (error.response.status === 404) // Page Not Found
+        else if (error.response.status === 404) //Page Not Found
         {
             swal("404 Error", "Url/Page Not Found", "warning");
             history.push('/404');
@@ -57,10 +51,11 @@ function AdminPrivateRoute({ ...rest }) {
     );
 
     if (loading) {
-        return <h1>Loading...</h1>;
+        return <h1>Loading...</h1>
     }
 
     return (
+
         <Route {...rest}
             render={({ props, location }) =>
                 Authenticated ?
@@ -68,6 +63,7 @@ function AdminPrivateRoute({ ...rest }) {
                     (<Redirect to={{ pathname: "/login", state: { from: location } }} />)
             }
         />
+
     );
 }
 
