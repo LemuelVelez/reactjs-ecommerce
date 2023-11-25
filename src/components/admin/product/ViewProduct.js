@@ -34,7 +34,9 @@ function ViewProduct() {
                     <td>{item.name}</td>
                     <td>{item.selling_price}</td>
                     <td><img src={`http://127.0.0.1:8000/${item.image}`} width="50px" alt={item.name} /></td>
-                    <td><Link to="edit-product" className="btn btn-success btn-sm">Edit</Link></td>
+                    <td>
+                        <Link to={`edit-product/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
+                    </td>
                     <td><button type="button" className="btn btn-danger btn-sm">Delete</button></td>
                 </tr>
             )
