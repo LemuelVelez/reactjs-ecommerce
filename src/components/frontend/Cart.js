@@ -13,7 +13,7 @@ function Cart()
 
     if(!localStorage.getItem('auth_token')){
         history.push('/');
-        swal("Warning","Login to goto Cart Page","error");
+        swal("Warning","Login to go to Cart Page","error");
     }
 
     useEffect(() => {

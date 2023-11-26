@@ -81,7 +81,7 @@ function ProductDetail(props) {
         var avail_stock = '';
         if (product.qty > 0) {
             avail_stock = <div>
-                <label className="btn-sm btn-success px-4 mt-2">In stock</label>
+                <label className="btn-sm bg-success text-white px-4 mt-2">In stock</label>
                 <div className="row">
                     <div className="col-md-3 mt-3">
                         <div className="input-group">
@@ -98,7 +98,7 @@ function ProductDetail(props) {
         }
         else {
             avail_stock = <div>
-                <label className="btn-sm btn-danger px-4 mt-2">Out of stock</label>
+                <label className="btn-sm bg-danger text-white px-4 mt-2">Out of stock</label>
             </div>
         }
     }
