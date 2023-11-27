@@ -32,7 +32,7 @@ const Navbar = () => {
     return (
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <Link className="navbar-brand" to="/admin">
-                <img src="/logo512.png" alt="Logo" height="55" width="55" />
+                <img src="/logo512.png" alt="Logo" height="45" width="45" />
                 SwiftShop
             </Link>
             <button
