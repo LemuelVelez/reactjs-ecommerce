@@ -23,7 +23,7 @@ function AddProduct() {
         popular: '',
         status: '',
     });
-    const [pricture, setPicture] = useState([]);
+    const [picture, setPicture] = useState([]);
     const [errorlist, setError] = useState([]);
 
     const handleInput = (e) => {
@@ -56,7 +56,7 @@ function AddProduct() {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('image', pricture.image);
+        formData.append('image', picture.image);
         formData.append('category_id', productInput.category_id);
         formData.append('slug', productInput.slug);
         formData.append('name', productInput.name);
@@ -97,7 +97,7 @@ function AddProduct() {
                 setError([]);
             }
             else if (res.data.status === 422) {
-                swal("All Fields are mandetory", "", "error");
+                swal("All Fields are mandatory", "", "error");
                 setError(res.data.errors);
             }
         });
