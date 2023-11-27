@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import logo from '../../../assets/logo_big.png';
 
 function ViewCategory() {
 
@@ -34,7 +35,7 @@ function ViewCategory() {
                 <div className="col-md-4" key={idx}>
                     <div className="card">
                         <Link to="">
-                            <img src="" className="w-100" alt={item.name} />
+                            <img src={logo} className="w-36" alt={item.name} />
                         </Link>
                         <div className="card-body">
                             <Link to={`collections/${item.slug}`}>

@@ -43,7 +43,6 @@ function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top">
             <div className="container">
-                {/* Use the correct path for the logo image */}
                 <Link className="navbar-brand" to="/">
                     <img src="/logo512.png" alt="Logo" height="55" width="55" />
                     SwiftShop

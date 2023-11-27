@@ -91,10 +91,6 @@ function EditCategory(props) {
                                     <label>Description</label>
                                     <textarea name="description" onChange={handleInput} value={categoryInput.description} className="form-control"></textarea>
                                 </div>
-                                <div className="form-group mb-3">
-                                    <label>Status</label>
-                                    <input type="checkbox" name="status" onChange={handleInput} value={categoryInput.status} /> Status 0=shown/1=hidden
-                                </div>
 
                             </div>
                             <div className="tab-pane card-body border fade" id="seo-tags" role="tabpanel" aria-labelledby="seo-tags-tab">
