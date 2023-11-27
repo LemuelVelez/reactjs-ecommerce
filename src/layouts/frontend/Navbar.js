@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
 import swal from 'sweetalert';
 import axios from 'axios';
 
 function Navbar() {
-
     const history = useHistory();
+
     const logoutSubmit = (e) => {
         e.preventDefault();
 
@@ -18,7 +17,6 @@ function Navbar() {
                 history.push('/');
             }
         });
-
     }
 
     var AuthButtons = '';
@@ -45,8 +43,11 @@ function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top">
             <div className="container">
-
-                <Link className="navbar-brand" to="#">Ecom Project</Link>
+                {/* Use the correct path for the logo image */}
+                <Link className="navbar-brand" to="/">
+                    <img src="/logo512.png" alt="Logo" height="55" width="55" />
+                    SwiftShop
+                </Link>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

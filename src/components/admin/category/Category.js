@@ -60,8 +60,8 @@ function Category() {
         <div className="container-fluid px-4">
 
             {
-                display_errors.map((item) => {
-                    return (<p className="mb-1" key={item}>{item}</p>)
+                display_errors.map((item, index) => {
+                    return (<p className="mb-1" key={index}>{item}</p>)
                 })
             }
 

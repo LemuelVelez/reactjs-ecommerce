@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Thankyou() {
-    return  (
+    return (
         <div>
             <div className="py-3 bg-warning">
                 <div className="container">
@@ -13,7 +13,7 @@ function Thankyou() {
                 <div className="container">
                     <div class="col-md-12">
                         <div className="card text-center p-5">
-                            <h4>Thanks for purchasing with Funda of Web IT - ReactJS Hooks Ecommerce</h4>
+                            <h4>Thanks for purchasing with SwiftShop</h4>
                         </div>
                     </div>
                 </div>
