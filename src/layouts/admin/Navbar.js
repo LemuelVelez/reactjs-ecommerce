@@ -31,7 +31,10 @@ const Navbar = () => {
 
     return (
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <Link className="navbar-brand ps-3" to="/admin">SwiftShop</Link>
+            <Link className="navbar-brand" to="/admin">
+                <img src="/logo512.png" alt="Logo" height="55" width="55" />
+                SwiftShop
+            </Link>
             <button
                 className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
                 id="sidebarToggle"
