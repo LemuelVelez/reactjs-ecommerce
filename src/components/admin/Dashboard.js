@@ -33,7 +33,7 @@ function Dashboard() {
                     </div>
                     <div className="stat-box" style={statBoxStyle}>
                         <h3>Revenue</h3>
-                        <p className="stat-count" style={statCountStyle}>$15,000</p>
+                        <p className="stat-count" style={statCountStyle}>₱15,000</p>
                     </div>
                     <div className="stat-box" style={statBoxStyle}>
                         <h3>Active Users</h3>
