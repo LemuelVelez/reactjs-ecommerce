@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +9,7 @@ function Checkout() {
     const history = useHistory();
     if (!localStorage.getItem('auth_token')) {
         history.push('/');
-        swal("Warning", "Login to goto Cart Page", "error");
+        swal("Warning", "Login to go to Cart Page", "error");
     }
 
     const [loading, setLoading] = useState(true);
@@ -55,58 +54,10 @@ function Checkout() {
         e.persist();
         setCheckoutInput({ ...checkoutInput, [e.target.name]: e.target.value });
     }
-
-    var orderinfo_data = {
-        firstname: checkoutInput.firstname,
-        lastname: checkoutInput.lastname,
-        phone: checkoutInput.phone,
-        email: checkoutInput.email,
-        address: checkoutInput.address,
-        city: checkoutInput.city,
-        state: checkoutInput.state,
-        zipcode: checkoutInput.zipcode,
-        payment_mode: 'Paid by PayPal',
-        payment_id: '',
-    }
-
-    // Paypal Code
-    const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
-    const createOrder = (data, actions) => {
-        return actions.order.create({
-            purchase_units: [
-                {
-                    amount: {
-                        value: totalCartPrice,
-                    },
-                },
-            ],
-        });
-    };
-    const onApprove = (data, actions) => {
-        // return actions.order.capture();
-        return actions.order.capture().then(function (details) {
-            console.log(details);
-            orderinfo_data.payment_id = details.id;
-
-            axios.post(`/api/place-order`, orderinfo_data).then(res => {
-                if (res.data.status === 200) {
-                    swal("Order Placed Successfully", res.data.message, "success");
-                    setError([]);
-                    history.push('/thank-you');
-                }
-                else if (res.data.status === 422) {
-                    swal("All fields are mandetory", "", "error");
-                    setError(res.data.errors);
-                }
-            });
-        });
-    };
-    // End-Paypal Code
-
-    const submitOrder = (e, payment_mode) => {
+    const submitOrder = (e) => {
         e.preventDefault();
 
-        var data = {
+        const data = {
             firstname: checkoutInput.firstname,
             lastname: checkoutInput.lastname,
             phone: checkoutInput.phone,
@@ -115,81 +66,18 @@ function Checkout() {
             city: checkoutInput.city,
             state: checkoutInput.state,
             zipcode: checkoutInput.zipcode,
-            payment_mode: payment_mode,
-            payment_id: '',
         }
-
-        switch (payment_mode) {
-            case 'cod':
-                axios.post(`/api/place-order`, data).then(res => {
-                    if (res.data.status === 200) {
-                        swal("Order Placed Successfully", res.data.message, "success");
-                        setError([]);
-                        history.push('/thank-you');
-                    }
-                    else if (res.data.status === 422) {
-                        swal("All fields are mandatory", "", "error");
-                        setError(res.data.errors);
-                    }
-                });
-                break;
-
-            case 'razorpay':
-                axios.post(`/api/validate-order`, data).then(res => {
-                    if (res.data.status === 200) {
-                        setError([]);
-                        var options = {
-                            "key": "rzp_test_5AEIUNtEJxBPvS",
-                            "amount": (1 * 100),
-                            "name": "Funda Reat Ecom",
-                            "description": "Thank you for purchasing with Funda",
-                            "image": "https://example.com/your_logo",
-                            "handler": function (response) {
-                                data.payment_id = response.razorpay_payment_id;
-
-                                axios.post(`/api/place-order`, data).then(place_res => {
-                                    if (place_res.data.status === 200) {
-                                        swal("Order Placed Successfully", place_res.data.message, "success");
-                                        history.push('/thank-you');
-                                    }
-                                });
-                            },
-                            "prefill": {
-                                "name": data.firstname + data.lastname,
-                                "email": data.email,
-                                "contact": data.phone
-                            },
-                            "theme": {
-                                "color": "#3399cc"
-                            }
-                        };
-                        var rzp = new window.Razorpay(options);
-                        rzp.open();
-                    }
-                    else if (res.data.status === 422) {
-                        swal("All fields are mandetory", "", "error");
-                        setError(res.data.errors);
-                    }
-                });
-                break;
-
-            case 'payonline':
-                axios.post(`/api/validate-order`, data).then(res => {
-                    if (res.data.status === 200) {
-                        setError([]);
-                        var myModal = new window.bootstrap.Modal(document.getElementById('payOnlineModal'));
-                        myModal.show();
-                    }
-                    else if (res.data.status === 422) {
-                        swal("All fields are mandetory", "", "error");
-                        setError(res.data.errors);
-                    }
-                });
-                break;
-
-            default:
-                break;
-        }
+        axios.post(`/api/place-order`, data).then(res => {
+            if (res.data.status === 200) {
+                swal("Order Placed Successfully", res.data.message, "success");
+                setError([]);
+                history.push('/thank-you');
+            }
+            else if (res.data.status === 422) {
+                swal("All fields are mandatory", "", "error");
+                setError(res.data.errors);
+            }
+        });
 
     }
 
@@ -269,8 +157,6 @@ function Checkout() {
                                 <div className="col-md-12">
                                     <div className="form-group text-end">
                                         <button type="button" className="btn btn-primary mx-1" onClick={(e) => submitOrder(e, 'cod')}>Place Order</button>
-                                        <button type="button" className="btn btn-primary mx-1" onClick={(e) => submitOrder(e, 'razorpay')}>Pay by Razorpay</button>
-                                        <button type="button" className="btn btn-warning mx-1" onClick={(e) => submitOrder(e, 'payonline')}>Pay Online</button>
 
                                     </div>
                                 </div>
@@ -323,25 +209,6 @@ function Checkout() {
 
     return (
         <div>
-
-            <div class="modal fade" id="payOnlineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Online Payment Mode</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <hr />
-                            <PayPalButton
-                                createOrder={(data, actions) => createOrder(data, actions)}
-                                onApprove={(data, actions) => onApprove(data, actions)}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div className="py-3 bg-warning">
                 <div className="container">
                     <h6>Home / Checkout</h6>
