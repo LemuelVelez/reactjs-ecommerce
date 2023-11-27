@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 const Navbar = () => {
     const history = useHistory();
@@ -14,20 +15,19 @@ const Navbar = () => {
         document.body.classList.toggle('sb-sidenav-toggled');
     };
 
-    const logoutSubmit = async (e) => {
+    const logoutSubmit = (e) => {
         e.preventDefault();
 
-        try {
-            const response = await axios.post('/api/logout');
-            if (response.data.status === 200) {
+        axios.post(`/api/logout`).then(res => {
+            if (res.data.status === 200) {
                 localStorage.removeItem('auth_token');
                 localStorage.removeItem('auth_name');
-                history.push('/login');
+                swal("Success", res.data.message, "success");
+                history.push('/');
             }
-        } catch (error) {
-            console.error('Logout failed', error);
-        }
-    };
+        });
+
+    }
 
     return (
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -54,7 +54,11 @@ const Navbar = () => {
                     </Link>
                     <ul className={`dropdown-menu dropdown-menu-end ${isOpen ? 'show' : ''}`} aria-labelledby="navbarDropdown">
                         <li><hr className="dropdown-divider" /></li>
-                        <li><Link className="dropdown-item" to="/login" onClick={logoutSubmit}>Logout</Link></li>
+                        <li>
+                            <Link className="dropdown-item" to="/login" onClick={logoutSubmit}>
+                                Logout
+                            </Link>
+                        </li>
                     </ul>
                 </li>
             </ul>
