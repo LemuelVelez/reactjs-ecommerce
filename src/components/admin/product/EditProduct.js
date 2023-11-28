@@ -96,7 +96,7 @@ function EditProduct(props) {
                 setError([]);
             }
             else if (res.data.status === 422) {
-                swal("All Fields are mandetory", "", "error");
+                swal("All Fields are mandatory", "", "error");
                 setError(res.data.errors);
             }
             else if (res.data.status === 404) {

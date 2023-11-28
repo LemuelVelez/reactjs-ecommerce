@@ -41,7 +41,7 @@ function EditCategory(props) {
                 setError([]);
             }
             else if (res.data.status === 422) {
-                swal("All fields are mandetory", "", "error");
+                swal("All fields are mandatory", "", "error");
                 setError(res.data.errors);
             }
             else if (res.data.status === 404) {
