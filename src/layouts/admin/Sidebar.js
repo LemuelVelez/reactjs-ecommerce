@@ -7,9 +7,9 @@ const Sidebar = () => {
             <div className="sb-sidenav-menu">
                 <div className="nav">
                     <div className="sb-sidenav-menu-heading">Core</div>
-                    <Link className="nav-link" to="/admin/dashboard">
-                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                        Dashboard
+                    <Link className="nav-link" to="/admin/orders">
+                        <div className="sb-nav-link-icon"><i className="fas fa-shopping-bag"></i></div>
+                        Orders
                     </Link>
                     <Link className="nav-link" to="/admin/add-category">
                         <div className="sb-nav-link-icon"><i className="fas fa-plus"></i></div>
@@ -31,16 +31,6 @@ const Sidebar = () => {
                             <Link className="nav-link" to="/admin/view-product">View Product</Link>
                         </nav>
                     </div>
-
-                    <Link className="nav-link" to="/admin/profile">
-                        <div className="sb-nav-link-icon"><i className="fas fa-user"></i></div>
-                        Profile
-                    </Link>
-
-                    <Link className="nav-link" to="/admin/orders">
-                        <div className="sb-nav-link-icon"><i className="fas fa-shopping-bag"></i></div>
-                        Orders
-                    </Link>
                 </div>
             </div>
             <div className="sb-sidenav-footer">

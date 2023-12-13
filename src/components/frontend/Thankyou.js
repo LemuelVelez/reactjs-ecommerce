@@ -11,9 +11,9 @@ function Thankyou() {
 
             <div className="py-4">
                 <div className="container">
-                    <div class="col-md-12">
+                    <div className="col-md-12">
                         <div className="card text-center p-5">
-                            <h4>Thanks for purchasing with SwiftShop</h4>
+                            <h4>Thanks for purchasing with SwiftShop. We will contact you soon.</h4>
                         </div>
                     </div>
                 </div>

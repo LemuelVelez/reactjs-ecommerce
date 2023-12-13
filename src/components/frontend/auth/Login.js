@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
-
     const history = useHistory();
 
     const [loginInput, setLogin] = useState({
@@ -35,20 +35,16 @@ function Login() {
                     swal("Success", res.data.message, "success");
                     if (res.data.role === 'admin') {
                         history.push('/admin/dashboard');
-                    }
-                    else {
+                    } else {
                         history.push('/');
                     }
-                }
-                else if (res.data.status === 401) {
+                } else if (res.data.status === 401) {
                     swal("Warning", res.data.message, "warning");
-                }
-                else {
+                } else {
                     setLogin({ ...loginInput, error_list: res.data.validation_errors });
                 }
             });
         });
-
     }
 
     return (
@@ -58,22 +54,36 @@ function Login() {
                     <div className="col-md-6">
                         <div className="card">
                             <div className="card-header">
-                                <h4>Login</h4>
+                                <h4>
+                                    <FontAwesomeIcon icon={faSignInAlt} /> Login
+                                </h4>
                             </div>
                             <div className="card-body">
-                                <form onSubmit={loginSubmit}>
+                                <form onSubmit={loginSubmit} className="d-flex flex-column">
                                     <div className="form-group mb-3">
-                                        <label>Email ID</label>
-                                        <input type="email" name="email" onChange={handleInput} value={loginInput.email} className="form-control" />
+                                        <label>Email Address</label>
+                                        <div className="input-group">
+                                            <span className="input-group-text">
+                                                <FontAwesomeIcon icon={faEnvelope} />
+                                            </span>
+                                            <input type="email" name="email" onChange={handleInput} value={loginInput.email} className="form-control" />
+                                        </div>
                                         <span>{loginInput.error_list.email}</span>
                                     </div>
                                     <div className="form-group mb-3">
                                         <label>Password</label>
-                                        <input type="password" name="password" onChange={handleInput} value={loginInput.password} className="form-control" />
+                                        <div className="input-group">
+                                            <span className="input-group-text">
+                                                <FontAwesomeIcon icon={faLock} />
+                                            </span>
+                                            <input type="password" name="password" onChange={handleInput} value={loginInput.password} className="form-control" />
+                                        </div>
                                         <span>{loginInput.error_list.password}</span>
                                     </div>
                                     <div className="form-group mb-3">
-                                        <button type="submit" className="btn btn-primary">Login</button>
+                                        <button type="submit" className="btn btn-primary">
+                                            <FontAwesomeIcon icon={faSignInAlt} /> Login
+                                        </button>
                                     </div>
                                 </form>
                             </div>

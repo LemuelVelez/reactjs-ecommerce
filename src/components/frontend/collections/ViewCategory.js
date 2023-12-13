@@ -9,21 +9,31 @@ function ViewCategory() {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {
-        let isMountered = true;
+        let isMounted = true;
 
-        axios.get(`/api/getCategory`).then(res => {
-            if (isMountered) {
-                if (res.data.status === 200) {
-                    // console.log(res.data.category);
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`/api/getCategory`);
+                if (isMounted && res.data.status === 200) {
                     setCategory(res.data.category);
                     setLoading(false);
                 }
+            } catch (error) {
+                if (error.response && error.response.status === 429) {
+                    // Handle rate limit exceeded
+                    console.error("Rate limit exceeded. Slow down your requests.");
+                } else {
+                    console.error("Error fetching data:", error.message);
+                }
             }
-        });
+        };
+
+        fetchData();
+
         return () => {
-            isMountered = false;
-        }
-    });
+            isMounted = false;
+        };
+    }, []);
 
     if (loading) {
         return <h4>Loading Categories...</h4>

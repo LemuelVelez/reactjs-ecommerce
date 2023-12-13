@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
+import { FaHome, FaInfo, FaTh, FaShoppingCart, FaSignInAlt, FaUserPlus, FaSignOutAlt } from 'react-icons/fa';
 
 function Navbar() {
     const history = useHistory();
@@ -24,18 +25,23 @@ function Navbar() {
         AuthButtons = (
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/login">Login</Link>
+                    <NavLink className="nav-link" to="/login" activeClassName="active">
+                        <FaSignInAlt /> Login
+                    </NavLink>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/register">Register</Link>
+                    <NavLink className="nav-link" to="/register" activeClassName="active">
+                        <FaUserPlus /> Register
+                    </NavLink>
                 </li>
             </ul>
         );
-    }
-    else {
+    } else {
         AuthButtons = (
             <li className="nav-item">
-                <button type="button" onClick={logoutSubmit} className="nav-link btn btn-danger btn-sm text-white">Logout</button>
+                <button type="button" onClick={logoutSubmit} className="nav-link btn btn-danger btn-sm text-white">
+                    <FaSignOutAlt /> Logout
+                </button>
             </li>
         );
     }
@@ -43,10 +49,10 @@ function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top">
             <div className="container">
-                <Link className="navbar-brand" to="/">
+                <NavLink className="navbar-brand" to="/">
                     <img src="/logo512.png" alt="Logo" height="55" width="55" />
                     SwiftShop
-                </Link>
+                </NavLink>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -55,19 +61,24 @@ function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className="nav-link active" to="/">Home</Link>
+                            <NavLink className="nav-link" exact to="/" activeClassName="active">
+                                <FaHome /> Home
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/about">About</Link>
+                            <NavLink className="nav-link" to="/about" activeClassName="active">
+                                <FaInfo /> About
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/contact">Contact</Link>
+                            <NavLink className="nav-link" to="/collections" activeClassName="active">
+                                <FaTh /> Collection
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/collections">Collection</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/cart">Cart</Link>
+                            <NavLink className="nav-link" to="/cart" activeClassName="active">
+                                <FaShoppingCart /> Cart
+                            </NavLink>
                         </li>
                         {AuthButtons}
                     </ul>

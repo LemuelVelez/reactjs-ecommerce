@@ -50,6 +50,10 @@ function Checkout() {
         };
     }, [history]);
 
+    if (loading) {
+        return <h4>Loading Checkout...</h4>
+    }
+
     const handleInput = (e) => {
         e.persist();
         setCheckoutInput({ ...checkoutInput, [e.target.name]: e.target.value });
@@ -66,7 +70,8 @@ function Checkout() {
             city: checkoutInput.city,
             state: checkoutInput.state,
             zipcode: checkoutInput.zipcode,
-        }
+            payment_mode: 'cod',
+        };
         axios.post(`/api/place-order`, data).then(res => {
             if (res.data.status === 200) {
                 swal("Order Placed Successfully", res.data.message, "success");
@@ -79,10 +84,6 @@ function Checkout() {
             }
         });
 
-    }
-
-    if (loading) {
-        return <h4>Loading Checkout...</h4>
     }
 
     var checkout_HTML = '';
